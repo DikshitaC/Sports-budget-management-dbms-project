@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard | By Code Info</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* Resetting default margin and padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body styling */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Container styling */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .navbar ul {
+      list-style-type: none;
+      display: flex;
+    }
+
+    .navbar li {
+      margin-right: 20px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: #007bff;
+    }
+
+    /* Main section styling */
+    .main {
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-top {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .main-top h1 {
+      font-size: 32px;
+      color: #333;
+    }
+
+    .main-body {
+      text-align: center;
+    }
+
+    .main-body img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <nav>
+      <div class="navbar">
+        <div class="logo">
+          <img src="https://college4u.in/wp-content/uploads/2016/12/MANIPAL-UNIVERSITY-LOGO.png" alt="College Logo" style="width: 120px; height: auto">
+        </div>
+        <ul>
+          <li><a href="apply_new_event.html"><span class="nav-item">Apply for Approval</span></a></li>
+          <li><a href="approval_status.php"><span class="nav-item">Approval Status</span></a></li>
+          <li><a href="frontpage.html" class="logout"><i class="fas fa-sign-out-alt"></i><span class="nav-item">Logout</span></a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section class="main">
+      <div class="main-top">
+        <h1>STUDENT DASHBOARD</h1>
+      </div>
+      <div class="main-body">
+        <img src="https://lh5.googleusercontent.com/p/AF1QipNdK49GnghYVyR5IZesfV8SiAgG7JYAPM8PX0ci=w1080-k-no" alt="background image">
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>
