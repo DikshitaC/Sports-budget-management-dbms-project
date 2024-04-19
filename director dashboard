@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Director Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .action-links a {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: #fff;
+            margin-right: 8px;
+        }
+
+        .action-links a:last-child {
+            margin-right: 0;
+        }
+
+        .action-links a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Full Name</th>
+            <th>Learner ID</th>
+            <th>Phone Number</th>
+            <th>Year</th>
+            <th>Course</th>
+            <th>Event Name</th>
+            <th>Event Venue</th>
+            <th>Event Date</th>
+            <th>Budget Required</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        <?php
+        $servername = "localhost:3307";
+        $username = "root";
+        $password = "";
+        $dbname = "finalfinal";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT sno, fullName, learnerId, phoneNumber, year, course, eventName, eventVenue, eventDate, budgetRequired, approvalStatus FROM events_approval WHERE approvalStatus = 'pending'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo "<tr><td>" . $row["fullName"]. "</td><td>" . $row["learnerId"]. "</td><td>" . $row["phoneNumber"]. "</td><td>" . $row["year"]. "</td><td>" . $row["course"]. "</td><td>" . $row["eventName"]. "</td><td>" . $row["eventVenue"]. "</td><td>" . $row["eventDate"]. "</td><td>" . $row["budgetRequired"]. "</td><td>" . $row["approvalStatus"]. "</td><td class='action-links'><a href='approve_request.php?id=".$row["sno"]."'>Approve</a><a href='reject_request.php?sno=".$row["sno"]."'>Reject</a></td></tr>";
+            }
+        } else {
+            echo "<tr><td colspan='11'>No pending requests found</td></tr>";
+        }
+        $conn->close();
+        ?>
+    </table>
+</body>
+</html>
