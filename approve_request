@@ -1,0 +1,32 @@
+<?php
+$servername = "localhost:3307";
+$username = "root";
+$password = "";
+$dbname = "finalfinal";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if the 'id' parameter is set in the URL
+if(isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    // Update the approval status to 'approved' in the database
+    $sql = "UPDATE events_approval SET approvalStatus = 'approved' WHERE sno = $id";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Request approved successfully";
+    } else {
+        echo "Error updating record: " . $conn->error;
+    }
+} else {
+    echo "Invalid request";
+}
+
+$conn->close();
+?>
