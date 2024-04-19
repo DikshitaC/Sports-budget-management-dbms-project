@@ -1,0 +1,49 @@
+<?php
+// Database connection
+$servername = "localhost:3307";
+$username = "root";
+$password = "";
+$dbname = "finalfinal";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $fullName = $_POST['fullName'];
+    $learnerId = $_POST['learnerId'];
+    $phoneNumber = $_POST['phoneNumber'];
+    $year = $_POST['year'];
+    $course = $_POST['course'];
+    $eventName = $_POST['eventName'];
+    $eventVenue = $_POST['eventVenue'];
+    $eventDate = $_POST['eventDate'];
+    $budgetRequired = $_POST['budgetRequired'];
+
+    // Prepare an SQL statement
+    $sql = "INSERT INTO events_approval (fullName, learnerId, phoneNumber, year, course, eventName, eventVenue, eventDate, budgetRequired) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    // Prepare the statement
+    $stmt = $conn->prepare($sql);
+
+    // Bind parameters
+    $stmt->bind_param("sssssssss", $fullName, $learnerId, $phoneNumber, $year, $course, $eventName, $eventVenue, $eventDate, $budgetRequired);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
+}
+?>
