@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Approved Events</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #004080; /* Manipal Blue */
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #e6f2ff; /* Lighter shade of Manipal Blue */
+            color: #004080; /* Manipal Blue */
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f7f7f7;
+        }
+
+        td {
+            color: #333;
+        }
+
+        td:first-child {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        td:last-child {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Approved Events</h1>
+    <table>
+        <tr>
+            <th style="background-color: #e6f2ff; color: #004080;">Event Name</th>
+            <th style="background-color: #e6f2ff; color: #004080;">Event Venue</th>
+            <th style="background-color: #e6f2ff; color: #004080;">Event Date</th>
+            <th style="background-color: #e6f2ff; color: #004080;">Budget Required</th>
+        </tr>
+        <?php
+        $servername = "localhost:3307";
+        $username = "root";
+        $password = "";
+        $dbname = "finalfinal";
+
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT eventName, eventVenue, eventDate, budgetRequired FROM events_approval WHERE approvalStatus = 'approved'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo "<tr><td>" . $row["eventName"]. "</td><td>" . $row["eventVenue"]. "</td><td>" . $row["eventDate"]. "</td><td>" . $row["budgetRequired"]. "</td></tr>";
+            }
+        } else {
+            echo "<tr><td colspan='4'>No approved events found</td></tr>";
+        }
+        $conn->close();
+        ?>
+    </table>
+</body>
+</html>
